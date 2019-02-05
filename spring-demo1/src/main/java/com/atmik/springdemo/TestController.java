@@ -9,7 +9,8 @@ public class TestController {
 	
 	@RequestMapping(value="/hello")
 	public String helloWorld() {
-		return "hello";
+		System.out.println("Spring boot first application");
+		return "welcome tp spring application";
 	}
 
 }
