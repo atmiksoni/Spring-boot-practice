@@ -1,5 +1,6 @@
 package com.atmik.springdemo;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,14 @@ public class StudentController {
 	public String helloStudent() {
 		return "Hello Student";
 	}
+	
+	@GetMapping("/searchStudent/all")
+	public @ResponseBody String getAllStudent( ) {
+		List<Student> studentList=  (List<Student>) studentRepository.findAll();
+		 studentList.forEach(s->System.out.println(s.toString()));
+		 
+		 return studentList.toString();
+	}
+	
 	
 }
