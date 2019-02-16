@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +25,12 @@ public class StudentController {
 	@Autowired
 	StudentRepository studentRepository;
 	
-	@GetMapping("/searchStudent/find")
-	public @ResponseBody Student getStudent(@RequestParam Long id ) {
+	@GetMapping("/searchStudent/find/{id}")
+	public @ResponseBody Student getStudent(@PathVariable Long id ) {
 		Optional optional=  studentRepository.findById(id);
+		if(!optional.isPresent()) {
+			throw new StudentNotFoundException("Student Not Found");
+		}
 		return (Student) optional.get();
 	}
 	

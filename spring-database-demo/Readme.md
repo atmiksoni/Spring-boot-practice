@@ -14,7 +14,7 @@ curl -X POST \
   
   Search method
   
-  http://localhost:8083/searchStudent/find?id=2
+  http://localhost:8083/searchStudent/find/2
   
   Search All
   
