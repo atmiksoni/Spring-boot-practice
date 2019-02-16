@@ -25,11 +25,14 @@ public class StudentController {
 	@Autowired
 	StudentRepository studentRepository;
 	
+	@Autowired
+	Configuration configuration;
+	
 	@GetMapping("/searchStudent/find/{id}")
 	public @ResponseBody Student getStudent(@PathVariable Long id ) {
 		Optional optional=  studentRepository.findById(id);
 		if(!optional.isPresent()) {
-			throw new StudentNotFoundException("Student Not Found");
+			throw new StudentNotFoundException(configuration.getStudentNotFound());
 		}
 		return (Student) optional.get();
 	}
